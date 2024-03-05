@@ -70,6 +70,10 @@ export default function PostForm({ post }) {
         return () => subscription.unsubscribe();
     }, [watch, slugTransform, setValue]);
 
+    if (userData === undefined) {
+        return <div>Loading...</div>; // You can replace this with a loading indicator
+    }
+
     return (
         <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
             <div className="w-2/3 px-2">
