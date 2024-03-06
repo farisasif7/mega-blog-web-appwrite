@@ -22,17 +22,29 @@ function App() {
     .finally(() => setLoading(false))
   }, [])
   
+  // return !loading ? (
+  //   <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
+  //     <div className='w-full block'>
+  //       <Header />
+  //       <main>
+  //       TODO:  <Outlet />
+  //       </main>
+  //       <Footer />
+  //     </div>
+  //   </div>
+  // ) : null
+
   return !loading ? (
-    <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
-      <div className='w-full block'>
-        <Header />
-        <main>
-        TODO:  <Outlet />
-        </main>
-        <Footer />
-      </div>
+    <div className='min-h-screen flex flex-wrap justify-between bg-gray-400'>
+        <div className='w-full block'>
+            <Header />
+            <main className='mx-auto max-w-6xl w-full p-4'>
+                <Outlet />
+            </main>
+            <Footer />
+        </div>
     </div>
-  ) : null
+) : null;
 }
 
 export default App
