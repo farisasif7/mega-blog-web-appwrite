@@ -19,7 +19,7 @@ export default function PostForm({ post }) {
 
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
-    console.log("PostForm :: userData", userData);
+    // console.log("PostForm :: userData", userData);
 
     const [userData2, setUserData2] = React.useState(null);
     useEffect(() => {

@@ -4,6 +4,7 @@ import appwriteService from "../appwrite/config";
 import { Button, Container } from "../components";
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import authService from "../appwrite/auth";
 
 export default function Post() {
     const [post, setPost] = useState(null);
@@ -12,7 +13,17 @@ export default function Post() {
 
     const userData = useSelector((state) => state.auth.userData);
 
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    const [userData2, setUserData2] = React.useState(null);
+    useEffect(() => {
+        const fetchUserData = async () => {
+            const user = await authService.getCurrentUser();
+            setUserData2(user);
+            console.log("PostForm :: userData2", user);
+        }
+        fetchUserData();
+    }, [])
+
+    const isAuthor = post && userData2 ? post.userId === userData.$id : false;
 
     useEffect(() => {
         if (slug) {
@@ -22,6 +33,8 @@ export default function Post() {
             });
         } else navigate("/");
     }, [slug, navigate]);
+
+    
 
     const deletePost = () => {
         appwriteService.deletePost(post.$id).then((status) => {
